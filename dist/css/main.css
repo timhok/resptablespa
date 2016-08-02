@@ -1,0 +1,24 @@
+.appWrapper{
+	display: block;
+	margin: 0 auto;
+	width: 90%;
+}
+.formWrapper{
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+}
+.formControl{
+	width: 100px;
+}
+.appWrapper a{
+	color: inherit;
+}
+.appWrapper a:hover{
+	border-bottom: 1px dashed #999;
+	text-decoration: none; 
+};
+.appWrapper a:hover{
+	border-bottom: 1px dashed #999;
+	text-decoration: none; 
+};

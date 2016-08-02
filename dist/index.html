@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>test</title>
+		<link rel="stylesheet" href="./css/main.css">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="page-header">
+		</div>
+		<div class ="appWrapper" id="app" ng-app="spa">
+			<div class="tableWrapper" ng-controller="TableController as vm">
+				<div class = "row" style="padding-bottom: 20px;">
+					<form class="form-inline" role="form" ng-submit="addItem()">
+						<div style="padding: 0 0 0 0;" class="col-md-8">
+							<div class="col-md-4">
+								<input class="form-control input-group-lg" type="time"
+									ng-model="time"
+									[name="string"]
+									[min="string"]
+									[max="string"]
+									[ng-min=""]
+									[ng-max=""]
+									[required="string"]
+									[ng-required="string"]
+									[ng-change="string"]>
+							</div>
+							<div class="col-md-4">
+								<input type="text" placeholder="Название предмета" class="form-control" ng-model="newSubject">
+							</div>
+							<div class="col-md-4">
+								<div class="input-group">
+									<select class="form-control" name="" id="" ng-model="daySelector">
+										<option value="Понедельник">Понедельник</option>
+										 <option value="Вторник">Вторник</option>
+										 <option value="Среда">Среда</option>
+										 <option value="Четверг">Четверг</option>
+										 <option value="Пятница">Пятница</option>
+									</select>
+									<span class="input-group-btn">
+										<input type="submit" value="Добавить" class="btn btn-primary"/>
+									</span>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class = "row">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Время</th>
+								<th ng-repeat="column in columns  | limitTo : rowsLimit : counter">{{column}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in data | orderBy : 'time'">
+								<td>{{item.time | date : 'HH:mm' : '-0000'}}</td>
+								<td class="row" ng-repeat="column in columns | limitTo : rowsLimit : counter">
+									<a href="#" ng-show="!showUpdate" ng-click="newValue = item[column]; showUpdate = true">{{item[column]}}</a>
+									<div class = "input-group" ng-show="showUpdate" ><input type="text" class="form-control transparent-input" ng-model="newValue"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="item[column] = newValue; addToLocalStorage(); showUpdate = false;">
+										<span class="glyphicon glyphicon-ok"></span>
+									</button></span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div ng-hide="hideIfTrue">
+					<button class="btn btn-default" ng-click="vm.goBack()">back</button><button class="btn btn-default" ng-click="vm.goForward()">next</button>
+				</div>
+				<p>debugging: width={{width}} and rows={{rowsLimit}} and counter={{counter}} and daySelector is {{daySelector}} and $scope.time is {{$scope.time}}</p>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
+		<script src="./app.js"></script>
+	</body>
+</html>
